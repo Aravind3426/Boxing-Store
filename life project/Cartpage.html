@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #52DCCD, #3A9D9D);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+header {
+            background-color: #333;
+            color: #fff;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            animation: slideDown 0.5s ease forwards;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+            color: #ff6347;
+            transition: color 0.3s ease;
+        }
+
+.cart-container {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 90%;
+    margin: 20px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #333333;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    background: #444444;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 6px;
+    color: #ffffff;
+    transition: background-color 0.3s;
+}
+
+ul li:hover {
+    background: #555555;
+}
+
+.btn {
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-size: 1.1em;
+    display: block;
+    margin: 20px auto 0;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #218838;
+}
+
+.btn.clear {
+    background-color: #d9534f;
+}
+
+.btn.clear:hover {
+    background-color: #c9302c;
+}
+
+.payment-container {
+    display: none;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 90%;
+    margin-top: 20px;
+}
+
+.payment-container input {
+    width: calc(100% - 20px);
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.payment-container button {
+    width: calc(100% - 20px);
+    padding: 12px;
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s;
+}
+
+.payment-container button:hover {
+    background-color: #218838;
+}
+
+    </style>
+</head>
+<body>
+    <header role="banner">
+        <div class="logo">Boxing Factory</div>
+        <nav role="navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="Menu.html">Menu</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="login.html">Login/Register</a></li>
+                <li><a href="Gloves.html">Gloves</a></li>
+                <li><a href="wrapes.html">Wraps</a></li>
+                <li><a href="outfit.html">OutFit</a></li>
+                <li><a href="Cartpage.html">Cart Page</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="cart-container">
+        <h1>Your <span>Cart</span></h1>
+        <div id="cart-items">
+            <p>Your cart is empty.</p>
+        </div>
+        <button class="btn" onclick="togglePaymentForm()">Proceed to Checkout</button>
+        <button class="btn clear" onclick="clearCart()">Clear All</button>
+        <a href="Menu.html" class="btn">Back to Shopping</a>
+    </div>
+    <div class="payment-container" id="payment-container">
+        <h2>Payment Details</h2>
+        <form id="payment-form">
+            <input type="text" id="card-name" name="card-name" placeholder="Cardholder Name" required>
+            <input type="text" id="card-number" name="card-number" placeholder="Card Number" pattern="\d{16}" title="Please enter a 16-digit card number" required>
+            <input type="text" id="card-expiry" name="card-expiry" placeholder="Expiry Date (MM/YY)" pattern="\d{2}/\d{2}" title="Please enter a valid expiry date in MM/YY format" required>
+            <input type="text" id="card-cvc" name="card-cvc" placeholder="CVC" pattern="\d{3}" title="Please enter a valid 3-digit CVC" required>
+            <button type="submit">Pay Now</button>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', loadCart);
+
+        function loadCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartItems = document.getElementById('cart-items');
+            if (cart.length > 0) {
+                cartItems.innerHTML = '<ul>' + cart.map(item => `<li>${item.name} - $${item.price.toFixed(2)}</li>`).join('') + '</ul>';
+            } else {
+                cartItems.innerHTML = '<p>Your cart is empty.</p>';
+            }
+        }
+
+        function clearCart() {
+            localStorage.removeItem('cart');
+            loadCart();
+        }
+
+        function togglePaymentForm() {
+            let paymentContainer = document.getElementById('payment-container');
+            paymentContainer.style.display = paymentContainer.style.display === 'none' ? 'block' : 'none';
+        }
+
+        document.getElementById('payment-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Payment submitted successfully!');
+            clearCart();
+            togglePaymentForm();
+        });
+    </script>
+</body>
+</html>

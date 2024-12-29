@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Product Menu</title>
+</head>
+<style>
+    body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+.product-menu {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px;
+    gap: 20px;
+    animation: fadeIn 0.5s ease;
+}
+
+.product-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    text-align: center;
+    width: 220px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.product-card img {
+    max-width: 100%;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+.product-card img:hover {
+    transform: scale(1.05);
+}
+
+.button-group {
+    margin-top: 10px;
+}
+
+.shop-now-button {
+    display: inline-block;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+}
+
+.shop-now-button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding-top: 60px;
+    animation: fadeIn 0.5s ease;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    border-radius: 15px;
+    animation: slideIn 0.5s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.modal-image {
+    max-width: 100%;
+    border-radius: 15px;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+}
+
+</style>
+<body>
+    <header role="banner">
+        <div class="logo">PRODUCTS SECTION</div>
+        <nav role="navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="Gloves.html">Gloves</a></li>
+                <li><a href="wrapes.html">Wraps</a></li>
+                <li><a href="outfit.html">OutFit</a></li>
+                <li><a href="login.html">Login/Register</a></li>
+                <li><a href="Cartpage.html">My Orders</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="product-menu">
+            <div class="product-card">
+                <img src="Unknown.jpeg" alt="Gloves">
+                <h2>Gloves</h2>
+                <p>Opening Gloves Page</p>
+                <div class="button-group">
+                    <a href="Gloves.html" class="shop-now-button">SHOP NOW</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="Unknown234.jpeg" alt="Product 2">
+                <h2>Wraps</h2>
+                <p>Opening Wraps Page</p>
+                <div class="button-group">
+                    <a href="wrapes.html" class="shop-now-button">SHOP NOW</a>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="images767867.jpeg" alt="Product 3">
+                <h2>OUTFIT</h2>
+                <p>Opening OutFit Store</p>
+                <div class="button-group">
+                    <a href="outfit.html" class="shop-now-button">SHOP NOW</a>
+                </div>
+            </div>
+        </div>
+        <div id="product-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2 id="modal-title"></h2>
+                <p id="modal-description"></p>
+                <img id="modal-image" src="" alt="" class="modal-image">
+            </div>
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const productCards = document.querySelectorAll('.product-card');
+    
+    productCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const title = card.querySelector('h2').innerText;
+            const description = card.querySelector('p').innerText || "Description not available.";
+            const image = card.querySelector('img').src;
+            showDetails(title, description, image);
+        });
+    });
+
+    window.addEventListener('click', event => {
+        const modal = document.getElementById('product-modal');
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        header.classList.toggle('scrolled', window.scrollY > 50);
+    });
+});
+
+function showDetails(title, description, image) {
+    document.getElementById('modal-title').innerText = title;
+    document.getElementById('modal-description').innerText = description;
+    document.getElementById('modal-image').src = image;
+    document.getElementById('product-modal').style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById('product-modal').style.display = "none";
+}
+
+    </script>
+</body>
+</html>

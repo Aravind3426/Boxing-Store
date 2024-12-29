@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Boxing Factory</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="ajju.js" defer></script>
+</head>
+<style>
+    * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    overflow-x: hidden;
+}
+
+header {
+    background: #000;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+nav a:hover {
+    color: #ff6347; /* Tomato color on hover */
+    transform: scale(1.1);
+}
+
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    margin-top: 60px; /* To avoid overlap with fixed header */
+}
+
+.hero video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    animation: fadeIn 1.5s ease forwards;
+    opacity: 0;
+    animation-delay: 0.5s;
+}
+
+.cta-container {
+    display: flex;
+    gap: 20px; /* Space between buttons */
+}
+
+.cta-button {
+    background-color: #ff6347; /* Tomato */
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    animation: fadeIn 1.5s ease forwards;
+    opacity: 0;
+    animation-delay: 1s;
+}
+
+.cta-button:hover {
+    background-color: #e5533d; /* Darker Tomato */
+    transform: scale(1.05);
+}
+
+footer {
+    background: #000;
+    color: #fff;
+    text-align: center;
+    padding: 10px 20px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+</style>
+<body>
+    <header role="banner">
+        <div class="logo">Boxing Factory</div>
+        <nav role="navigation">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="login.html">Login/Register</a></li>
+                <li><a href="Cartpage.html">My Orders</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero" role="banner">
+            <video src="WhatsApp Video 2024-09-27 at 23.03.48.mp4" autoplay muted loop></video>
+            <h1>Elevate Your Game with Our Custom Boxing Gear</h1>
+            <div class="cta-container">
+                <a href="Menu.html" class="cta-button">Shop Now</a>
+                <a href="login.html" class="cta-button">Login/Register</a>
+            </div>
+        </section>
+    </main>
+
+    <footer role="contentinfo">
+        <p>&copy; 2024 Boxing Factory. All rights reserved.</p>
+    </footer>
+    <script>
+        // Smooth scrolling for internal links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
+    </script>
+</body>
+</html>

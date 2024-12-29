@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Boxing Factory</title>
+    <link rel="stylesheet" href="">
+    <script src="" defer></script>
+    <style>
+        /* CSS goes here */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            animation: slideDown 0.5s ease forwards;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+            color: #ff6347;
+            transition: color 0.3s ease;
+        }
+
+        main {
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            margin: 20px 0;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .about-section {
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #333;
+            animation: zoomIn 0.5s ease forwards;
+        }
+
+        p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            opacity: 0;
+            animation: slideIn 0.5s forwards;
+            transform: translateY(20px);
+            animation-fill-mode: forwards;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            position: relative;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Delay for paragraphs */
+        p:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        p:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+<body>
+    <header role="banner">
+        <div class="logo">Boxing Factory</div>
+        <nav role="navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="Menu.html">Menu</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="login.html">Login/Register</a></li>
+                <li><a href="Gloves.html">Gloves</a></li>
+                <li><a href="wrapes.html">Wraps</a></li>
+                <li><a href="outfit.html">OutFit</a></li>
+                <li><a href="Cartpage.html">Cart Page</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="about" role="region" aria-labelledby="about-title" class="about-section">
+            <h2 id="about-title">About Us</h2>
+            <p>Welcome to Boxing Factory, where we provide high-quality boxing gear tailored for every athlete. Our mission is to enhance your performance and ensure you train and compete with the best equipment available.</p>
+            <p>With years of experience in the boxing industry, our team is dedicated to delivering products that meet the highest standards of quality and safety.</p>
+        </section>
+    </main>
+
+    <footer role="contentinfo">
+        <p>&copy; 2024 Boxing Factory. All rights reserved.</p>
+    </footer>
+</body>
+</html>

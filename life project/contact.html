@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Boxing Factory</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="ajju.js" defer></script>
+</head>
+<style>
+    * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+main {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    margin: 20px 0;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    border-color: #ff6347;
+    box-shadow: 0 0 5px rgba(255, 99, 71, 0.5);
+    outline: none;
+}
+
+button {
+    padding: 10px;
+    background-color: #ff6347;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #e5533d;
+    transform: scale(1.05);
+}
+
+.footer-text {
+    margin-top: 20px;
+    text-align: center;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    position: relative;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+main {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+</style>
+<body>
+    <header role="banner">
+        <div class="logo">Boxing Factory</div>
+        <nav role="navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="Menu.html">Menu</a></li>
+                <li><a href="login.html">Login/Register</a></li>
+                <li><a href="Gloves.html">Gloves</a></li>
+                <li><a href="wrapes.html">Wraps</a></li>
+                <li><a href="outfit.html">OutFit</a></li>
+                <li><a href="Cartpage.html">Cart Page</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="contact" role="region" aria-labelledby="contact-title">
+            <h2 id="contact-title">Contact Us</h2>
+            <form id="contactForm" onsubmit="handleSubmit(event)">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" placeholder="Your Name" required aria-required="true">
+                
+                <label for="email">Your Email:</label>
+                <input type="email" id="email" placeholder="Your Email" required aria-required="true">
+                
+                <label for="message">Your Message:</label>
+                <textarea id="message" placeholder="Your Message" required aria-required="true"></textarea>
+                
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer role="contentinfo">
+        <p>&copy; 2024 Boxing Factory. All rights reserved.</p>
+    </footer>
+    <script>
+        function handleSubmit(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    // Here you can add your logic to send data, e.g., API call
+    alert(`Message Sent!\nName: ${name}\nEmail: ${email}\nMessage: ${message}`);
+
+    // Reset the form
+    document.getElementById('contactForm').reset();
+}
+
+    </script>
+</body>
+</html>

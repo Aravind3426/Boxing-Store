@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boxing Factory - Products</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <style>
+        /* CSS code */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: #000;
+            color: #fff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        header.scrolled {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ff6347;
+        }
+
+        .hero {
+            height: 60vh;
+            background: url('Unknown.jpeg') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            background-color: #ff6347;
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #e5533d;
+            transform: scale(1.05);
+        }
+
+        .product-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 40px;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            border-radius: 8px;
+        }
+
+        .product-card {
+            flex: 1 1 calc(30% - 40px);
+            margin: 10px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+        .product-image {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .details {
+            text-align: center;
+        }
+
+        .details h2 {
+            margin-bottom: 10px;
+        }
+
+        .quantity-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .quantity-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .quantity-button:hover {
+            background-color: #0056b3;
+        }
+
+        .quantity-input {
+            width: 40px;
+            text-align: center;
+            margin: 0 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .add-to-cart-button,
+        .buy-now-button {
+            background-color: #28a745; /* Green */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .add-to-cart-button:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        .buy-now-button {
+            background-color: #007bff; /* Blue */
+        }
+
+        .buy-now-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .reviews {
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        .reviews h4 {
+            margin-bottom: 10px;
+        }
+
+        .review-input {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        .submit-review-button {
+            background-color: #ff6347;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-review-button:hover {
+            background-color: #e5533d;
+        }
+
+        footer {
+            background: #000;
+            color: #fff;
+            text-align: center;
+            padding: 15px 20px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cart-icon {
+            width: 30px;
+            height: 30px;
+            transition: transform 0.3s ease;
+            margin-left: 20px;
+        }
+
+        .cart-icon.animate {
+            animation: bounce 0.5s ease forwards;
+        }
+
+        @keyframes bounce {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Boxing Factory</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="wrapes.html">Wraps</a></li>
+                <li><a href="outfit.html">OutFit</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="login.html">Login/Register</a></li>
+                <li>
+                    <a href="Cartpage.html">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24" class="cart-icon">
+                            <path d="M7 4h14l-1.5 9H9l-1-2H3V4h4zm10 14H8a1 1 0 0 1-1-1h10a1 1 0 0 1-1 1zM8 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm8 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Professional Boxing Gloves</h1>
+            <p>High-quality boxing gloves designed for comfort and durability.</p>
+            <a href="#product-details" class="cta-button">SCROLL DOWN</a>
+        </section>
+
+        <section id="product-details" class="product-section">
+            <!-- Boxing Glove Model 1 -->
+            <div class="product-card" data-id="1">
+                <div class="product-image">
+                    <img src="image.123.jpeg" alt="Boxing Glove Model 1">
+                </div>
+                <div class="details">
+                    <h2>Everlast Pro Style</h2>
+                    <p>Crafted with top-grade materials for optimal performance.</p>
+                    <h3>Price: $79.99</h3>
+                    <div class="quantity-section">
+                        <button class="quantity-button decrease">-</button>
+                        <input type="number" value="1" min="1" class="quantity-input" readonly>
+                        <button class="quantity-button increase">+</button>
+                    </div>
+                    <div class="button-group">
+                        <button class="add-to-cart-button">Add to Cart</button>
+                        <button class="buy-now-button">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Boxing Glove Model 2 -->
+            <div class="product-card" data-id="2">
+                <div class="product-image">
+                    <img src="venum-elite-boxing-gloves_3.jpg" alt="Boxing Glove Model 2">
+                </div>
+                <div class="details">
+                    <h2>Venum Elite</h2>
+                    <p>Lightweight design for agility and speed.</p>
+                    <h3>Price: $99.99</h3>
+                    <div class="quantity-section">
+                        <button class="quantity-button decrease">-</button>
+                        <input type="number" value="1" min="1" class="quantity-input" readonly>
+                        <button class="quantity-button increase">+</button>
+                    </div>
+                    <div class="button-group">
+                        <button class="add-to-cart-button">Add to Cart</button>
+                        <button class="buy-now-button">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Boxing Glove Model 3 -->
+            <div class="product-card" data-id="3">
+                <div class="product-image">
+                    <img src="TUF-GVM_BLK.jpg" alt="Boxing Glove Model 3">
+                </div>
+                <div class="details">
+                    <h2>TUF GVM BLK</h2>
+                    <p>Heavy-duty construction for serious training.</p>
+                    <h3>Price: $99.99</h3>
+                    <div class="quantity-section">
+                        <button class="quantity-button decrease">-</button>
+                        <input type="number" value="1" min="1" class="quantity-input" readonly>
+                        <button class="quantity-button increase">+</button>
+                    </div>
+                    <div class="button-group">
+                        <button class="add-to-cart-button">Add to Cart</button>
+                        <button class="buy-now-button">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Boxing Glove Model 4 -->
+            <div class="product-card" data-id="4">
+                <div class="product-image">
+                    <img src="rrf.jpeg" alt="Boxing Glove Model 4">
+                </div>
+                <div class="details">
+                    <h2>AURION TECH</h2>
+                    <p>Exceptional padding for maximum protection.</p>
+                    <h3>Price: $79.99</h3>
+                    <div class="quantity-section">
+                        <button class="quantity-button decrease">-</button>
+                        <input type="number" value="1" min="1" class="quantity-input" readonly>
+                        <button class="quantity-button increase">+</button>
+                    </div>
+                    <div class="button-group">
+                        <button class="add-to-cart-button">Add to Cart</button>
+                        <button class="buy-now-button">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Boxing Glove Model 5 -->
+            <div class="product-card" data-id="5">
+                <div class="product-image">
+                    <img src="images123.jpeg" alt="Boxing Glove Model 5">
+                </div>
+                <div class="details">
+                    <h2>LEONE POWERLOCK</h2>
+                    <p>Designed for a natural fit and feel.</p>
+                    <h3>Price: $95.99</h3>
+                    <div class="quantity-section">
+                        <button class="quantity-button decrease">-</button>
+                        <input type="number" value="1" min="1" class="quantity-input" readonly>
+                        <button class="quantity-button increase">+</button>
+                    </div>
+                    <div class="button-group">
+                        <button class="add-to-cart-button">Add to Cart</button>
+                        <button class="buy-now-button">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Boxing Glove Model 6 -->
+            <div class="product-card" data-id="6">
+                <div class="product-image">
+                    <img src="images6.jpeg" alt="Boxing Glove Model 6">
+                </div>
+                <div class="details">
+                    <h2>RDX T3</h2>
+                    <p>Innovative technology for superior impact protection.</p>
+                    <h3>Price: $149.99</h3>
+                    <div class="quantity-section">
+                        <button class="quantity-button decrease">-</button>
+                        <input type="number" value="1" min="1" class="quantity-input" readonly>
+                        <button class="quantity-button increase">+</button>
+                    </div>
+                    <div class="button-group">
+                        <button class="add-to-cart-button">Add to Cart</button>
+                        <button class="buy-now-button">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Boxing Glove Model 7 -->
+            <div class="product-card" data-id="7">
+                <div class="product-image">
+                    <img src="images2.jpeg" alt="Boxing Glove Model 7">
+                </div>
+                <div class="details">
+                    <h2>PUNCHR STRONG</h2>
+                    <p>Handcrafted gloves for exceptional quality.</p>
+                    <h3>Price: $199.99</h3>
+                    <div class="quantity-section">
+                        <button class="quantity-button decrease">-</button>
+                        <input type="number" value="1" min="1" class="quantity-input" readonly>
+                        <button class="quantity-button increase">+</button>
+                    </div>
+                    <div class="button-group">
+                        <button class="add-to-cart-button">Add to Cart</button>
+                        <button class="buy-now-button">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Boxing Glove Model 8 -->
+            <div class="product-card" data-id="8">
+                <div class="product-image">
+                    <img src="images.321.jpeg" alt="Boxing Glove Model 8">
+                </div>
+                <div class="details">
+                    <h2>STING HEAD</h2>
+                    <p>Stylish and functional for all training levels.</p>
+                    <h3>Price: $84.99</h3>
+                    <div class="quantity-section">
+                        <button class="quantity-button decrease">-</button>
+                        <input type="number" value="1" min="1" class="quantity-input" readonly>
+                        <button class="quantity-button increase">+</button>
+                    </div>
+                    <div class="button-group">
+                        <button class="add-to-cart-button">Add to Cart</button>
+                        <button class="buy-now-button">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Boxing Glove Model 9 -->
+            <div class="product-card" data-id="9">
+                <div class="product-image">
+                    <img src="Cleto Reyes.jpeg" alt="Boxing Glove Model 9">
+                </div>
+                <div class="details">
+                    <h2>CLETO REYES</h2>
+                    <p>Engineered for elite performance.</p>
+                    <h3>Price: $119.99</h3>
+                    <div class="quantity-section">
+                        <button class="quantity-button decrease">-</button>
+                        <input type="number" value="1" min="1" class="quantity-input" readonly>
+                        <button class="quantity-button increase">+</button>
+                    </div>
+                    <div class="button-group">
+                        <button class="add-to-cart-button">Add to Cart</button>
+                        <button class="buy-now-button">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Boxing Glove Model 10 -->
+            <div class="product-card" data-id="10">
+                <div class="product-image">
+                    <img src="51htsjxisEL._SL500_.jpg" alt="Boxing Glove Model 10">
+                </div>
+                <div class="details">
+                    <h2>USI(UNIVERSAL)</h2>
+                    <p>Professional Gloves In Boxing</p>
+                    <h3>Price: $499.99</h3>
+                    <div class="quantity-section">
+                        <button class="quantity-button decrease">-</button>
+                        <input type="number" value="1" min="1" class="quantity-input" readonly>
+                        <button class="quantity-button increase">+</button>
+                    </div>
+                    <div class="button-group">
+                        <button class="add-to-cart-button">Add to Cart</button>
+                        <button class="buy-now-button">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Boxing Factory. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript code
+        document.querySelectorAll('.quantity-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const input = this.parentElement.querySelector('.quantity-input');
+                let currentValue = parseInt(input.value);
+                if (this.textContent === '+') {
+                    input.value = currentValue + 1;
+                } else if (currentValue > 1) {
+                    input.value = currentValue - 1;
+                }
+            });
+        });
+
+        function animateCartIcon() {
+            const cartIcon = document.querySelector('.cart-icon');
+            cartIcon.classList.add('animate');
+            setTimeout(() => {
+                cartIcon.classList.remove('animate');
+            }, 500);
+        }
+
+        document.querySelectorAll('.add-to-cart-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const productCard = this.closest('.product-card');
+                const productId = productCard.getAttribute('data-id');
+                const productName = productCard.querySelector('h2').textContent;
+                const productPrice = productCard.querySelector('h3').textContent.replace('Price: $', '');
+                const quantity = productCard.querySelector('.quantity-input').value;
+
+                const product = {
+                    id: productId,
+                    name: productName,
+                    price: parseFloat(productPrice),
+                    quantity: parseInt(quantity)
+                };
+
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                cart.push(product);
+                localStorage.setItem('cart', JSON.stringify(cart));
+
+                animateCartIcon(); // Animate cart icon on add to cart
+                window.location.href = 'Cartpage.html';
+            });
+        });
+
+        // Redirect to payment page when Buy Now is clicked
+        document.querySelectorAll('.buy-now-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const productCard = this.closest('.product-card');
+                const productId = productCard.getAttribute('data-id');
+                const productName = productCard.querySelector('h2').textContent;
+                const productPrice = productCard.querySelector('h3').textContent.replace('Price: $', '');
+                const quantity = productCard.querySelector('.quantity-input').value;
+
+                const product = {
+                    id: productId,
+                    name: productName,
+                    price: parseFloat(productPrice),
+                    quantity: parseInt(quantity)
+                };
+
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                cart.push(product);
+                localStorage.setItem('cart', JSON.stringify(cart));
+
+                window.location.href = 'Cartpage.html'; // Redirect to payment page
+            });
+        });
+    </script>
+</body>
+</html>
